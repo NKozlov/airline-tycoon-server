@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+        >
+    <context:annotation-config/>
+
+    <!-- =========================================================================================== -->
+    <!-- Config -->
+    <!-- =========================================================================================== -->
+
+    <util:properties id="fileConfigProps" location="classpath:file/file-settings.properties"/>
+    <util:properties id="nettyConfig" location="classpath:config/netty-server-config.properties"/>
+
+    <!-- =========================================================================================== -->
+    <!-- Console beans -->
+    <!-- =========================================================================================== -->
+
+    <bean name="consoleEventHandler" class="org.yeti.console.ConsoleEventHandler">
+        <constructor-arg>
+            <list>
+                <ref bean="helpCommand"/>
+                <ref bean="quitCommand"/>
+                <ref bean="resetCommand"/>
+                <ref bean="restartCommand"/>
+                <ref bean="startCommand"/>
+                <ref bean="stopCommand"/>
+                <ref bean="welcomeCommand"/>
+            </list>
+        </constructor-arg>
+    </bean>
+    <bean name="consoleEventListener" class="org.yeti.console.listener.ConsoleEventListener"/>
+
+    <!-- =========================================================================================== -->
+    <!-- Console command beans -->
+    <!-- =========================================================================================== -->
+
+    <bean name="helpCommand" class="org.yeti.console.command.impl.HelpCommand"/>
+    <bean name="quitCommand" class="org.yeti.console.command.impl.QuitCommand"/>
+    <bean name="resetCommand" class="org.yeti.console.command.impl.ResetCommand"/>
+    <bean name="restartCommand" class="org.yeti.console.command.impl.RestartCommand"/>
+    <bean name="startCommand" class="org.yeti.console.command.impl.StartCommand"/>
+    <bean name="stopCommand" class="org.yeti.console.command.impl.StopCommand"/>
+    <bean name="welcomeCommand" class="org.yeti.console.command.impl.WelcomeCommand"/>
+
+    <!-- =========================================================================================== -->
+    <!-- Netty beans -->
+    <!-- =========================================================================================== -->
+
+    <bean name="nettyServer" class="org.yeti.server.NettyServer"/>
+
+    <bean name="serverResources" class="org.yeti.server.ServerResources"/>
+
+    <!-- =========================================================================================== -->
+    <!-- Logic beans -->
+    <!-- =========================================================================================== -->
+
+    <bean name="sqNumNatureFileFactory" class="org.yeti.server.logic.file.FileFactory">
+        <constructor-arg index="0" ref="fileConfigProps"/>
+    </bean>
+
+    <bean name="naturalSeqLogicHandler" class="org.yeti.server.logic.NaturalSeqLogicHandler">
+        <constructor-arg index="0" ref="sqNumNatureFileFactory"/>
+    </bean>
+
+    <bean name="fileExecutor" class="org.yeti.server.logic.file.FileExecutor"/>
+
+    <!-- =========================================================================================== -->
+    <!-- Admin Interface beans -->
+    <!-- =========================================================================================== -->
+
+    <bean name="nettyServerAdmin" class="org.yeti.server.admin.NettyServerAdmin"/>
+
+    <bean name="fileReadQueueAdmin" class="org.yeti.server.admin.FileReadQueueAdmin"/>
+
+    <bean name="sessionReadQueueAdmin" class="org.yeti.server.admin.SessionReadQueueAdmin"/>
+
+    <!-- =========================================================================================== -->
+    <!-- Utils beans -->
+    <!-- =========================================================================================== -->
+    <bean id="applicationContextProvider" class="org.yeti.utilz.appcontext.ApplicationContextProvider"/>
+
+</beans>
