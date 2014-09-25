@@ -39,7 +39,7 @@ public enum CommandNames {
                 }
             }
         } else {
-            throw new NullPointerException("commandName is null.");
+            throw new NullPointerException("Argument commandName is null.");
         }
         throw new IllegalArgumentException("No constant with text " + commandName + " found");
     }

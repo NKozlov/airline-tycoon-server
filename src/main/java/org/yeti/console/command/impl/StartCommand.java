@@ -5,6 +5,7 @@
 package org.yeti.console.command.impl;
 
 import org.yeti.console.command.AbstractCommand;
+import org.yeti.console.command.CommandNames;
 import org.yeti.console.command.RunCommand;
 
 /**
@@ -17,7 +18,7 @@ import org.yeti.console.command.RunCommand;
 public class StartCommand extends AbstractCommand implements RunCommand {
 
     public StartCommand() {
-        this.setCommandName("start");
+        this.setCommandName(CommandNames.START.toString());
     }
 
     /**

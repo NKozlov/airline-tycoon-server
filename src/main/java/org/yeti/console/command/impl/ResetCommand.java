@@ -7,6 +7,7 @@ package org.yeti.console.command.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yeti.console.command.AbstractCommand;
+import org.yeti.console.command.CommandNames;
 import org.yeti.console.command.RunCommand;
 
 import java.io.IOException;
@@ -23,7 +24,7 @@ public class ResetCommand extends AbstractCommand implements RunCommand {
     private static final Logger logger = LoggerFactory.getLogger(ResetCommand.class);
 
     public ResetCommand() {
-        this.setCommandName("reset");
+        this.setCommandName(CommandNames.RESET.toString());
     }
 
     /**

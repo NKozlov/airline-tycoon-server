@@ -5,6 +5,7 @@
 package org.yeti.console.command.impl;
 
 import org.yeti.console.command.AbstractCommand;
+import org.yeti.console.command.CommandNames;
 import org.yeti.console.command.RunCommand;
 
 /**
@@ -17,7 +18,7 @@ import org.yeti.console.command.RunCommand;
 public class HelpCommand extends AbstractCommand implements RunCommand {
 
     public HelpCommand() {
-        this.setCommandName("help");
+        this.setCommandName(CommandNames.HELP.toString());
     }
 
     /**
